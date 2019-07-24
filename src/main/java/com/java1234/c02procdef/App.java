@@ -2,7 +2,6 @@ package com.java1234.c02procdef;
 
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
-import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 
 import java.util.List;
@@ -39,7 +38,7 @@ public class App {
         System.out.println("流程部署ID:" + deployment.getId());
         System.out.println("流程部署Name:" + deployment.getName());*/
 
-        //查询流程定义：返回流程定义集合，对应表 act_re_procdef
+        //查询流程定义：查询Key的所有版本的流程定义，返回流程定义集合，对应表 act_re_procdef
         String processDefinitionKey = "MyFirstProcess";
         List<ProcessDefinition> pdList = processEngine.getRepositoryService() // 获取service
                 .createProcessDefinitionQuery() // 创建流程定义查询
@@ -53,7 +52,7 @@ public class App {
             System.out.println("=========");
         }
 
-        //查询流程定义：通过ID查询某个流程定义,返回流程定义，对应表 act_re_procdef
+        //查询流程定义：查询ID的某个流程定义,返回流程定义，对应表 act_re_procdef
         /*String processDefinitionId = "MyFirstProcess:2:7504";
         ProcessDefinition pd = processEngine.getRepositoryService() // 获取service
                 .createProcessDefinitionQuery() // 创建流程定义查询
