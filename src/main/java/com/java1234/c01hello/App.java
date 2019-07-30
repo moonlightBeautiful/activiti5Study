@@ -42,8 +42,8 @@ public class App {
        /*     // 使用流程引擎（RepositoryService流程仓库服务）
         Deployment deployment = processEngine.getRepositoryService()
                 .createDeployment()
-                .addClasspathResource("diagrams/Hello.bpmn")
-                .addClasspathResource("diagrams/Hello.png")
+                .addClasspathResource("diagrams/hello.bpmn")
+                .addClasspathResource("diagrams/hello.png")
                 .name("Hello流程")
                 .deploy();
         System.out.println("流程部署ID:" + deployment.getId());

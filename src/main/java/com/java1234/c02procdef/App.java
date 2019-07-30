@@ -20,8 +20,8 @@ public class App {
         // 部署流程定义方式一，bpmn和png文件：
         /*Deployment deployment = processEngine.getRepositoryService()
                 .createDeployment()
-                .addClasspathResource("diagrams/Hello.bpmn")
-                .addClasspathResource("diagrams/Hello.png")
+                .addClasspathResource("diagrams/hello.bpmn")
+                .addClasspathResource("diagrams/hello.png")
                 .name("Hello流程")
                 .deploy();
         System.out.println("流程部署ID:" + deployment.getId());
@@ -66,8 +66,8 @@ public class App {
 
         //根据流程部署id和资源文件名称来查询流程图片
         /*InputStream inputStream = processEngine.getRepositoryService() // 获取sevice
-                .getResourceAsStream("10001", "diagrams/Hello.png");
-        FileUtils.copyInputStreamToFile(inputStream, new File("c:/Hello.png"));*/
+                .getResourceAsStream("10001", "diagrams/hello.png");
+        FileUtils.copyInputStreamToFile(inputStream, new File("c:/hello.png"));*/
 
         // 查询最新版本的流程定义
         /*List<ProcessDefinition> listAll = processEngine.getRepositoryService() // 获取service
@@ -88,7 +88,7 @@ public class App {
         }*/
 
         // 删除所有key相同的流程定义
-        String processDefinitionKey = "helloWorld2";
+       /* String processDefinitionKey = "helloWorld2";
         List<ProcessDefinition> pdList = processEngine.getRepositoryService() // 获取service
                 .createProcessDefinitionQuery() // 创建流程定义查询
                 .processDefinitionKey(processDefinitionKey) // 根据key查询
@@ -96,6 +96,6 @@ public class App {
         for (ProcessDefinition pd : pdList) {
             processEngine.getRepositoryService()
                     .deleteDeployment(pd.getDeploymentId(), true);
-        }
+        }*/
     }
 }
