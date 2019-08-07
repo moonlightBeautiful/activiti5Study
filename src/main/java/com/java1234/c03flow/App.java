@@ -47,8 +47,7 @@ public class App {
         // 完成任务
         /*processEngine.getTaskService()
                 .complete("20002");*/
-        // 查询流程实例状态（正在执行或者已经结束）：用流程实例id在运行时表中查询
-        //当流程实例结束，则运行时表全部清空
+        // 查询流程实例状态（正在执行或者已经结束）：用流程实例id在运行时表中查询，当流程实例结束，则运行时表全部清空
         /*ProcessInstance pi = processEngine.getRuntimeService() // 获取运行时Service
                 .createProcessInstanceQuery() // 创建流程实例查询
                 .processInstanceId("25001") // 用流程实例id查询
