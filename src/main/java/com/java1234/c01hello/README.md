@@ -25,11 +25,6 @@
                 ACT_RE_DEPLOYMENT
                     ID：自动生成，来自于ACT_GE_PROPERTY（系统配置表）
                     NAME:流程部署的名称
-            # 资源文件表
-                ACT_GE_BYTEARRAY
-                    ID：自动生成
-                    NAME:资源的路径
-                    DEPLOYMENT_ID：流程部署表的ID
             # 流程定义表
                 ACT_RE_PROCDEF
                     ID：自动生成
@@ -38,6 +33,11 @@
                     DEPLOYMENT_ID：指向流程部署表的ID
                     RESOURCE_NAME：bmp文件路径
                     DGRM_RESOURCE_NAME：png文件路径
+            # 资源文件表
+                 ACT_GE_BYTEARRAY
+                    ID：自动生成
+                    NAME:资源的路径
+                    DEPLOYMENT_ID：流程部署表的ID
          # 启动流程实例涉及到的表：
             运行时和历史相关的表：ACT_RU_*、ACT_HI_*。            
             # 运行时：
