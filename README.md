@@ -19,3 +19,15 @@
 3.流程
 4.流程变量
 5.流程控制网关
+6.任务分配
+    个人任务分配：1.在示例图中写死 2.使用流程变量${流程变量} 3.监听器方式
+    
+    
+    
+    
+Activiti Designer
+是#Activiti#配套的基于Eclipse（等编码工具）的可视化流程设计器，有Activiti团队开发，紧密贴合BPMN2.0规范以及Activiti的扩展元素。除了可视化设计之外，还可以打包流程资源文件（包括bpmn、png、jar）、自动生成流程测试代码（JUnit）。
+Activiti Modeler
+网页版在线流程设计器。
+Activiti Explorer
+官方demo，目前把Activiti Modeler整合进来了
