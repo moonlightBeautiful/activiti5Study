@@ -1,10 +1,39 @@
+# activiti5Study
+1.hello
+    简介：
+        业务流程管理（BPM，也就是工作流）开源项目。
+    推荐书籍：
+        activiti实战
+    代码实战
+        1.pom引入依赖
+            4个依赖： mysql驱动 activiti引擎和模型  activiti与spring整合
+        2.数据库
+            创建数据库 db_activiti
+        3.hello开始
+            流程引擎配置（2种配置方式，使用xml配置数据库或者在java中设置数据库）
+            流程引擎
+        4.会在数据库 db_activiti 中生成 activiti 需要的25张表，这25张表就是activiti的运行环境     
+    25张表：
+        分为6种类型
+            ACT_RE_*: 'RE'表示repository，仓库，包含了流程定义和流程静态资源 （图片，规则，等等）。                                     
+            ACT_RU_*: 'RU'表示runtime，运行时，包含流程实例，任务，变量，异步任务，等运行中的数据。 Activiti只在流程实例执行过程中保存这些数据， 在流程结束时就会删除这些记录。 这样运行时表可以一直很小速度很快。                                        
+            ACT_ID_*: 'ID'表示identity，身份，包含身份信息，比如用户，组等等。                                        
+            ACT_HI_*: 'HI'表示history，历史，包含历史数据，比如历史流程实例， 变量，任务等等。                                       
+            ACT_GE_*: 'GE'表示general，通用， 包含资源文件，用在不同的场景下。      
+    安装4activiti辅助插件ActiBMPN
+        Activiti BPMN 2.0 designer
+        http://activiti.org/designer/update/
+        然后选择自动创建流程定义图片当保存实例图的时候
+        NOTE：idea使用的时候有时候报错，从起idea，忽略吧，解决不了
+        
+        
+        
+    1.6跑流程
+        代码层次和数据库层次
+        
 # activiti5Study hello
    构建activiti工作流环境，就是在数据库汇中生成25张表和一些数据。
-        ACT_RE_*: 'RE'表示repository。  这些仓库的表，包含了流程定义和流程静态资源 （图片，规则，等等）。                                     
-        ACT_RU_*: 'RU'表示runtime。 这些运行时的表，包含流程实例，任务，变量，异步任务，等运行中的数据。 Activiti只在流程实例执行过程中保存这些数据， 在流程结束时就会删除这些记录。 这样运行时表可以一直很小速度很快。                                        
-        ACT_ID_*: 'ID'表示identity。 这些身份表，包含身份信息，比如用户，组等等。                                        
-        ACT_HI_*: 'HI'表示history。 这些历史表，包含历史数据，比如历史流程实例， 变量，任务等等。                                       
-        ACT_GE_*: 'GE'表示general。这些通用数据表， 包含资源文件。                                     
+                                
         还有一些辅助表。
     画一个流程图
         idea不知道为啥总是包activiBPM插件错误，忽略吧 解决：重启idea
