@@ -1,12 +1,13 @@
 # activiti5Study procdef
-   流程定义部署：
-      流程图的指定的流程id不变，重复部署，部署id会变和流程定义id不变和流程版本会升级
-        bmpn+png 方式
-        bmpn+png的zip 方式
-   流程定义查询：ACT_RE_PROCDEF
+   流程模板(定义)部署：
+        就是把流程模板信息写到数据库中。重复部署相同流程（流程图的id相同），流程版本会升级(act_re_procdef表的version字段)。
+        有2种方式
+            bmpn+png文件classPath方式
+            bmpn+png的压缩文件zip方式
+   流程模板(定义)查询：ACT_RE_PROCDEF
         查询Key版本的所有流程定义
         查询指定id的流程定义
-        查询流程定义的设计图片：资源表ACT_GE_BYTEARRAY
+        查询某个流程定义的设计图片（先从数据库中找到部署id+资源全路径）：资源表ACT_GE_BYTEARRAY
             ACT_RE_PROCDEF：部署id和资源名称
             ACT_GE_BYTEARRAY：部署id和名称（资源名称）和bytes(资源存放在这里)
             用到commons-io插件

@@ -1,11 +1,19 @@
-package com.java1234.c02procdef;
+package com.ims;
 
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipInputStream;
 
 /**
  * @author gaoxu
@@ -14,10 +22,25 @@ import java.util.List;
  */
 public class App {
     public static void main(String[] args) throws IOException {
-        // 获取默认流程引擎实例，会自动读取activiti.cfg.xml文件
+        /**
+         * 流程模板ACT_RE_PROCDEF
+         *  1.流程模板(定义)部署：
+         *      2种方式，1.bpmn和png方式。2.zip方式。
+         *  2.流程模板(定义)查询：
+         *      1.查询出来所有流程模板：不加条件就OK
+         *      2.根据流程模板key查询
+         *      3.根据流程模板id查询
+         *      4.还有其他各种条件
+         *      5.查询某个流程定义的设计图片
+         *      6.查询最新版本流程模板
+         *  3.流程模板(定义)删除：一般都是级联删除的
+         *      1.删除某个流程模板的所有版本
+         *      2.删除某个流程模板的指定版本
+         */
+        /**
+         *  1.流程模板部署：1.bpmn和png方式
+         */
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-        //RepositoryService流程仓库服务：可以多次部署,升版本。部署完之后，在流程定义表中出现流程模板
-        // 部署流程定义方式一，bpmn和png文件：
         /*Deployment deployment = processEngine.getRepositoryService()
                 .createDeployment()
                 .addClasspathResource("diagrams/hello.bpmn")
@@ -26,10 +49,12 @@ public class App {
                 .deploy();
         System.out.println("流程部署ID:" + deployment.getId());
         System.out.println("流程部署Name:" + deployment.getName());*/
-        // 部署流程定义方式二，bpmn和png文件的zip文件：
-        /*InputStream inputStream = App.class // 取得当前class对象
+        /**
+         *  1.流程模板部署：2.bpmn和png文件的zip文件
+         */
+       /* InputStream inputStream = App.class // 取得当前class对象
                 .getClassLoader() // 获取类加载器
-                .getResourceAsStream("diagrams/hello.zip"); // 获取指定文件资源流
+                .getResourceAsStream("diagrams/Hello.zip"); // 获取指定文件资源流
         ZipInputStream zipInputStream = new ZipInputStream(inputStream); // 实例化zip输入流
         Deployment deployment = processEngine.getRepositoryService() // 获取部署相关Service
                 .createDeployment() // 创建部署
@@ -40,7 +65,23 @@ public class App {
         System.out.println("流程部署Name:" + deployment.getName());*/
 
         //查询流程定义：查询Key（流程设计图的id）的所有版本的流程定义，返回流程定义集合，对应表 act_re_procdef
-        /*String processDefinitionKey = "MyFirstProcess";
+        /**
+         * 2.流程模板(定义)查询：1.查询出来所有流程模板：不加条件就OK
+         */
+        /*List<ProcessDefinition> pdList = processEngine.getRepositoryService() // 获取service
+                .createProcessDefinitionQuery() // 创建流程定义查询
+                .list();  // 返回一个集合
+        for (ProcessDefinition pd : pdList) {
+            System.out.println("ID_" + pd.getId());
+            System.out.println("NAME_" + pd.getName());
+            System.out.println("KEY_" + pd.getKey());
+            System.out.println("VERSION_" + pd.getVersion());
+            System.out.println("===========================================");
+        }*/
+        /**
+         * 2.流程模板(定义)查询 ：2.根据流程模板key查询
+         */
+       /* String processDefinitionKey = "MyFirstProcess";
         List<ProcessDefinition> pdList = processEngine.getRepositoryService() // 获取service
                 .createProcessDefinitionQuery() // 创建流程定义查询
                 .processDefinitionKey(processDefinitionKey) // 通过key查询
@@ -50,10 +91,11 @@ public class App {
             System.out.println("NAME_" + pd.getName());
             System.out.println("KEY_" + pd.getKey());
             System.out.println("VERSION_" + pd.getVersion());
-            System.out.println("=========");
+            System.out.println("=============================================================");
         }*/
-
-        //查询流程定义：查询ID的某个流程定义,返回流程定义，对应表 act_re_procdef
+        /**
+         * 2.流程模板(定义)查询 ：3.根据流程模板id查询
+         */
         /*String processDefinitionId = "MyFirstProcess:2:7504";
         ProcessDefinition pd = processEngine.getRepositoryService() // 获取service
                 .createProcessDefinitionQuery() // 创建流程定义查询
@@ -64,17 +106,24 @@ public class App {
         System.out.println("KEY_" + pd.getKey());
         System.out.println("VERSION_" + pd.getVersion());*/
 
+
+        /**
+         * 2.流程模板(定义)查询 ：5.查询某个流程定义的设计图片（先从数据库中找到部署id+资源全路径）
+         */
         //根据流程部署id和资源文件名称来查询流程图片
-        /*InputStream inputStream = processEngine.getRepositoryService() // 获取sevice
-                .getResourceAsStream("10001", "diagrams/hello.png");
+       /* InputStream inputStream = processEngine.getRepositoryService() // 获取sevice
+                .getResourceAsStream("2501", "diagrams/hello.png");
         FileUtils.copyInputStreamToFile(inputStream, new File("c:/hello.png"));*/
 
-        // 查询最新版本的流程定义
+        /**
+         * 2.流程模板(定义)查询 ：6.查询所有的最新版本流程模板
+         */
         /*List<ProcessDefinition> listAll = processEngine.getRepositoryService() // 获取service
                 .createProcessDefinitionQuery() // 创建流程定义查询
                 .orderByProcessDefinitionVersion().asc() // 根据流程定义版本升序
                 .list();  // 返回一个集合
         Map<String, ProcessDefinition> map = new LinkedHashMap<String, ProcessDefinition>();
+        //key相同会覆盖，按照版本排序，则从老到新版本排序
         for (ProcessDefinition pd : listAll) {
             map.put(pd.getKey(), pd);
         }
@@ -86,8 +135,9 @@ public class App {
             System.out.println("VERSION_" + pd.getVersion());
             System.out.println("=========");
         }*/
-
-        // 删除所有key相同的流程定义
+        /**
+         * 3.流程模板(定义)删除：1.删除某个流程模板的所有版本（先查询出来所有的流程定义，然后一个一个的删除）
+         */
        /* String processDefinitionKey = "helloWorld2";
         List<ProcessDefinition> pdList = processEngine.getRepositoryService() // 获取service
                 .createProcessDefinitionQuery() // 创建流程定义查询
@@ -97,5 +147,8 @@ public class App {
             processEngine.getRepositoryService()
                     .deleteDeployment(pd.getDeploymentId(), true);
         }*/
+        /**
+         * 3.流程模板(定义)删除：2.删除某个流程模板的指定版本（先查询出来所有的流程定义，然后找到指定版本删除）
+         */
     }
 }
