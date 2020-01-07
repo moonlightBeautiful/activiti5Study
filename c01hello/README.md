@@ -76,7 +76,7 @@
                         dgrm_resource_name：png文件路径                
             3.启动流程实例： 运行时表+历史表 
                 运行时表 
-                    act_ru_identitylink(身份联系表)：流程实例涉及到的人                                  
+                    act_ru_identitylink(身份联系表)：执行对象的身份联系                                 
                         id：自动生成
                         type：类型
                         uer_id：用户id，来自bmp文件
