@@ -1,6 +1,8 @@
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
@@ -28,8 +30,17 @@ public class App {
          *      3.混合方式查询
          *  4.完成任务
          *      1.通过任务id
-         *  5.查询流程状态
-         *  6.历史流程查询
+         *  5.查询流程状态   查询运行时流程实例表
+         *      2种状态：1.正在执行 2.执行完了
+         *     1.查询指定流程是否完成
+         *     2.查询所有正在运行的流程实例
+         *  6.历史任务查询  历史任务实例表
+         *      1.已经完成的
+         *      2.未完成的
+         *  7.历史活动节点查询 历史活动实例表
+         *      1.已经完成的
+         *      2.未完成的
+         *  8.历史流程节点查询 流程实例表
          */
 
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
@@ -76,10 +87,14 @@ public class App {
          *  4.完成任务
          *      1.通过任务id
          */
-       /* processEngine.getTaskService().complete("25002");*/
+        /* processEngine.getTaskService().complete("25002");*/
 
-
-        // 查询流程实例状态（正在执行或者已经结束）：用流程实例id在运行时表中查询，当流程实例结束，则运行时表全部清空
+        /**
+         *  5.查询流程状态：查询运行时流程实例表
+         *      2种状态：1.正在执行 2.执行完了
+         *      1.查询指定流程是否完成
+         *      2.查询所有正在运行的流程实例
+         */
         /*ProcessInstance pi = processEngine.getRuntimeService() // 获取运行时Service
                 .createProcessInstanceQuery() // 创建流程实例查询
                 .processInstanceId("25001") // 用流程实例id查询
@@ -90,15 +105,15 @@ public class App {
             System.out.println("流程已经执行结束！");
         }*/
 
-
-
-
-
-        // 历史流程实例任务节点查询：包含历史流程实例的过程
+        /**
+         * 6.历史任务查询  历史任务实例表
+         *      1.已完成的
+         *      2.未完成的
+         */
         /*List<HistoricTaskInstance> list = processEngine.getHistoryService() // 历史相关Service
                 .createHistoricTaskInstanceQuery() // 创建历史任务实例查询
                 .processInstanceId("17501") // 用流程实例id查询
-                .finished() // 查询已经完成的任务
+                .finished() // 查询已经完成的任务  unfinished()  //未完成的
                 .list();
         for (HistoricTaskInstance hti : list) {
             System.out.println("任务ID:" + hti.getId());
@@ -109,8 +124,11 @@ public class App {
             System.out.println("结束时间：" + hti.getEndTime());
             System.out.println("=================================");
         }*/
-
-        // 历史流程实例活动节点查询：包含start和end节点
+        /**
+         *  7.历史活动节点查询 历史活动实例表 包含start和end节点
+         *      1.已经完成的
+         *      2.未完成的
+         */
         /*List<HistoricActivityInstance> list = processEngine.getHistoryService() // 历史相关Service
                 .createHistoricActivityInstanceQuery() // 创建历史活动实例查询
                 .processInstanceId("17501") // 执行流程实例id
@@ -125,6 +143,21 @@ public class App {
             System.out.println("结束时间：" + hai.getEndTime());
             System.out.println("=================================");
         }*/
-
+        /**
+         *  8.历史流程节点查询 流程实例表
+         *      1.已经完成的
+         *      2.未完成的
+         */
+         List<HistoricProcessInstance> list = processEngine.getHistoryService() // 历史相关Service
+                .createHistoricProcessInstanceQuery()// 创建历史活动实例查询
+                .unfinished()   //也可以查询结束的 finished()
+                .list();
+        for (HistoricProcessInstance hpi : list) {
+            System.out.println("流程id：" + hpi.getId());
+            System.out.println("流程名称：" + hpi.getName());
+            System.out.println("开始时间：" + hpi.getStartTime());
+            System.out.println("结束时间：" + hpi.getEndTime());
+            System.out.println("=================================");
+        }
     }
 }
