@@ -12,28 +12,28 @@ import java.util.List;
 /**
  * @author gaoxu
  * @date 2019-07-18 10:31
- * @description ... Àà
+ * @description ... ç±»
  * 1.
  */
 public class App {
     public static void main(String[] args) {
         /**
-         * 1.¹¹½¨Á÷³ÌÒıÇæ£º1.javaÅäÖÃ 2.xmlÎÄ¼şÅäÖÃ
-         * 2.²¿ÊğÁ÷³ÌÄ£°å[Ò²½Ğ×ö¶¨Òå]£¨RepositoryServiceÁ÷³Ì²Ö¿â·şÎñ£©£ºÆäÊµ¾ÍÊÇ°ÑbpmnºÍpngÎÄ¼şĞÅÏ¢Ğ´Èëµ½ÁËÊı¾İ¿âÁ÷³Ì¶¨Òå±íÖĞ¡£
-         * 3.Æô¶¯Á÷³ÌÊµÀı£¨RuntimeServiceÁ÷³ÌÔËĞĞ·şÎñ£©£ºÆäÊµ¾ÍÊÇ´ÓÁ÷³ÌÄ£°åÖĞÊµÀı³öÀ´Ò»¸ö¾ßÌåµÄÁ÷³Ì
-         * 4.²é¿´ÓÃ»§ÈÎÎñ£¨TaskService£©
-         * 5.´¦ÀíÓÃ»§ÈÎÎñ£¨TaskService£©£ºÄ¿Ç°Ö»»áÍê³É
+         * 1.æ„å»ºæµç¨‹å¼•æ“ï¼š1.javaé…ç½® 2.xmlæ–‡ä»¶é…ç½®
+         * 2.éƒ¨ç½²æµç¨‹æ¨¡æ¿[ä¹Ÿå«åšå®šä¹‰]ï¼ˆRepositoryServiceæµç¨‹ä»“åº“æœåŠ¡ï¼‰ï¼šå…¶å®å°±æ˜¯æŠŠbpmnå’Œpngæ–‡ä»¶ä¿¡æ¯å†™å…¥åˆ°äº†æ•°æ®åº“æµç¨‹å®šä¹‰è¡¨ä¸­ã€‚
+         * 3.å¯åŠ¨æµç¨‹å®ä¾‹ï¼ˆRuntimeServiceæµç¨‹è¿è¡ŒæœåŠ¡ï¼‰ï¼šå…¶å®å°±æ˜¯ä»æµç¨‹æ¨¡æ¿ä¸­å®ä¾‹å‡ºæ¥ä¸€ä¸ªå…·ä½“çš„æµç¨‹
+         * 4.æŸ¥çœ‹ç”¨æˆ·ä»»åŠ¡ï¼ˆTaskServiceï¼‰
+         * 5.å¤„ç†ç”¨æˆ·ä»»åŠ¡ï¼ˆTaskServiceï¼‰ï¼šç›®å‰åªä¼šå®Œæˆ
          */
 
         /**
-         * ¹¹½¨Á÷³ÌÒıÇæ======================================================================================
-         * ÅäÖÃÄ£Ê½£º
-         *      DB_SCHEMA_UPDATE_CREATE_DROPÏÈÉ¾³ı±íÔÙ´´½¨±í£¬
-         *      DB_SCHEMA_UPDATE_TRUEÈç¹û±í²»´æÔÚ£¬×Ô¶¯´´½¨±í£¬
-         *      DB_SCHEMA_UPDATE_FALSE²»ÄÜ×Ô¶¯´´½¨±í£¬ĞèÒª±í´æÔÚ
+         * 1.æ„å»ºæµç¨‹å¼•æ“======================================================================================
+         * é…ç½®æ¨¡å¼ï¼š
+         *      DB_SCHEMA_UPDATE_CREATE_DROPå…ˆåˆ é™¤è¡¨å†åˆ›å»ºè¡¨ï¼Œ
+         *      DB_SCHEMA_UPDATE_TRUEå¦‚æœè¡¨ä¸å­˜åœ¨ï¼Œè‡ªåŠ¨åˆ›å»ºè¡¨ï¼Œ
+         *      DB_SCHEMA_UPDATE_FALSEä¸èƒ½è‡ªåŠ¨åˆ›å»ºè¡¨ï¼Œéœ€è¦è¡¨å­˜åœ¨
          */
         /**
-         * 1.javaÅäÖÃ
+         * 1.1  javaé…ç½®
          */
         /*ProcessEngineConfiguration pec = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();
         pec.setJdbcDriver("com.mysql.cj.jdbc.Driver");
@@ -43,58 +43,62 @@ public class App {
         pec.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
         ProcessEngine processEngine = pec.buildProcessEngine();*/
         /**
-         * 2.xmlÅäÖÃ£º1.Ö¸¶¨xmlÎÄ¼ş 2.Ä¬ÈÏxmlÎÄ¼ş
+         * 1.2  xmlé…ç½®ï¼š1.æŒ‡å®šxmlæ–‡ä»¶ 2.é»˜è®¤xmlæ–‡ä»¶
          */
-        /*ProcessEngineConfiguration processEngineConfiguration =
-                ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti.cfg.xml");
+        /*ProcessEngineConfiguration processEngineConfiguration = ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti.cfg.xml");
         ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();*/
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
         /**
-         * 2.²¿ÊğÁ÷³Ì¶¨Òå[Ò²½Ğ×öÄ£°å]£¨RepositoryServiceÁ÷³Ì²Ö¿â·şÎñ£©£ºÆäÊµ¾ÍÊÇ°ÑbpmnºÍpngÎÄ¼şĞÅÏ¢Ğ´Èëµ½ÁËÊı¾İ¿âÁ÷³Ì¶¨Òå±íÖĞ¡£
+         * 2.éƒ¨ç½²æµç¨‹å®šä¹‰[ä¹Ÿå«åšæ¨¡æ¿]==============================================================
+         * ï¼ˆRepositoryServiceæµç¨‹ä»“åº“æœåŠ¡ï¼‰ï¼šå…¶å®å°±æ˜¯æŠŠbpmnå’Œpngæ–‡ä»¶ä¿¡æ¯å†™å…¥åˆ°äº†æ•°æ®åº“æµç¨‹å®šä¹‰è¡¨ä¸­ã€‚
          */
         /*Deployment deployment = processEngine.getRepositoryService()
                 .createDeployment()
-                .addClasspathResource("diagrams/Hello.bpmn") //¼ÓÔØ×ÊÔ´ÎÄ¼ş
-                .addClasspathResource("diagrams/Hello.png")//¼ÓÔØ×ÊÔ´ÎÄ¼ş
-                .name("HelloÁ÷³Ì")
-                .category("Àà±ğ1")
+                .addClasspathResource("diagrams/myProcess.bpmn")
+                .addClasspathResource("diagrams/myProcess.png")
+                .name("æˆ‘çš„æµç¨‹")
+                .category("ç±»åˆ«1")
                 .deploy();
-        System.out.println("²¿ÊğÊÇ³ÌÊğ£¬Á÷³ÌÄ£°åÊÇÁ÷³ÌÄ£°å¡£Ã¿´Î²¿ÊğÁ÷³ÌÄ£°å£¬¼ÇÂ¼Õâ´ÎµÄ²¿Êğ¡£");
-        System.out.println("²¿ÊğÖ»¼ÇÂ¼ÁËÒ»Ğ©²¿ÊğĞÅÏ¢£¬Í¨¹ı²¿Êğ¶ÔÏóÖ»ÄÜ»ñÈ¡Ò»Ğ©²¿Êğ±íÉÏµÄĞÅÏ¢¡£");
-        System.out.println("²¿ÊğID:" + deployment.getId());
-        System.out.println("²¿ÊğName:" + deployment.getName());
-        System.out.println("²¿ÊğÀà±ğ:" + deployment.getDeploymentTime());
-        System.out.println("²¿ÊğÊ±¼ä:" + deployment.getDeploymentTime());*/
+        System.out.println("éƒ¨ç½²ID:" + deployment.getId());
+        System.out.println("éƒ¨ç½²Name:" + deployment.getName());
+        System.out.println("éƒ¨ç½²ç±»åˆ«:" + deployment.getCategory());
+        System.out.println("éƒ¨ç½²æ—¶é—´:" + deployment.getDeploymentTime());*/
 
         /**
-         * 3. Æô¶¯Á÷³ÌÊµÀı£¨RuntimeServiceÁ÷³ÌÔËĞĞ·şÎñ£©£ºÆäÊµ¾ÍÊÇ´ÓÁ÷³ÌÄ£°åÖĞÊµÀı³öÀ´Ò»¸ö¾ßÌåµÄÁ÷³Ì
+         * 3. å¯åŠ¨æµç¨‹å®ä¾‹ï¼ˆRuntimeServiceæµç¨‹è¿è¡ŒæœåŠ¡ï¼‰ï¼š===============================================================================
+         *  å…¶å®å°±æ˜¯ä»æµç¨‹æ¨¡æ¿ä¸­å®ä¾‹å‡ºæ¥ä¸€ä¸ªå…·ä½“çš„æµç¨‹
          */
         /*ProcessInstance processInstance = processEngine.getRuntimeService()
-                .startProcessInstanceByKey("myProcess_1"); //¸ù¾İÁ÷³ÌÄ£°åkey(Á÷³ÌÍ¼µÄid)Æô¶¯Á÷³ÌÊµÀı
-        System.out.println("Á÷³ÌÊµÀıËùÊôÁ÷³ÌÄ£°åID:" + processInstance.getProcessDefinitionId());
-        System.out.println("Á÷³ÌÊµÀıID:" + processInstance.getId());
-        System.out.println("Á÷³ÌÊµÀıname:" + processInstance.getName());*/
+                .startProcessInstanceByKey("myProcess");
+        System.out.println("æµç¨‹æ¨¡æ¿ID:" + processInstance.getProcessDefinitionId());
+        System.out.println("æµç¨‹å®ä¾‹ID:" + processInstance.getId());
+        System.out.println("æµç¨‹å®ä¾‹name:" + processInstance.getName());
+        System.out.println("æµç¨‹æ´»åŠ¨èŠ‚ç‚¹ID:" +  processInstance.getActivityId());*/
 
         /**
-         * 4. ²é¿´ÓÃ»§ÈÎÎñ£¨TaskService£©£º
+         * 4. æŸ¥çœ‹ç”¨æˆ·ä»»åŠ¡ï¼ˆTaskServiceï¼‰ï¼š===============================================================================================
+         *      æ¡ä»¶ï¼šæµç¨‹å®ä¾‹idã€æŒ‡å®šäººï¼Œå¯å•ç‹¬å¯ç»„åˆ
+         *          .taskAssignee("java1234")
          */
         /*List<Task> taskList = processEngine.getTaskService()
                 .createTaskQuery()
-                .processInstanceId("12501")
-               .taskAssignee("java1234")
+                .processInstanceId("5001")
                 .list();
         for (Task task : taskList) {
-            System.out.println("ÈÎÎñID:" + task.getId());
-            System.out.println("ÈÎÎñÃû³Æ:" + task.getName());
-            System.out.println("ÈÎÎñ´´½¨Ê±¼ä:" + task.getCreateTime());
-            System.out.println("ÈÎÎñÎ¯ÅÉÈË:" + task.getAssignee());
-            System.out.println("Á÷³ÌÊµÀıID:" + task.getProcessInstanceId());
+            System.out.println("ä»»åŠ¡ID:" + task.getId());
+            System.out.println("ä»»åŠ¡key:" + task.getTaskDefinitionKey());
+            System.out.println("ä»»åŠ¡åç§°:" + task.getName());
+            System.out.println("ä»»åŠ¡ç±»åˆ«:" + task.getCategory());
+            System.out.println("ä»»åŠ¡åˆ›å»ºæ—¶é—´:" + task.getCreateTime());
+            System.out.println("ä»»åŠ¡å§”æ´¾äºº:" + task.getAssignee());
+            System.out.println("æµç¨‹æ¨¡æ¿ID:" + task.getProcessDefinitionId());
+            System.out.println("æµç¨‹å®ä¾‹ID:" + task.getProcessInstanceId());
         }*/
         /**
-         * 4. Íê³ÉÓÃ»§ÈÎÎñ£¨TaskService£©£º
+         * 4. å®Œæˆç”¨æˆ·ä»»åŠ¡ï¼ˆTaskServiceï¼‰ï¼š======================================================================================
          */
-        /*processEngine.getTaskService().complete("12504");*/
+        /*processEngine.getTaskService().complete("5004");*/
 
     }
 }

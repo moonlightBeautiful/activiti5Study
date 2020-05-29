@@ -1,20 +1,23 @@
 # activiti5Study
-1.hello
-    1.1简介：
-        业务流程管理（BPM，也就是工作流）开源项目。
-    1.2推荐书籍：activiti实战
-    1.3代码实战
-        0.用到4个依赖 mysql驱动 activiti引擎和模型  activiti与spring整合
-        1.不使用配置文件初始化activiti
-        2.不使用配置文件初始化activiti
-    1.4activiti自己创建25张表，6种类型
-    1.5安装4activiti辅助插件ActiBMPN
-        Activiti BPMN 2.0 designer
-        http://activiti.org/designer/update/
-        然后选择自动创建流程定义图片当保存实例图的时候
-        NOTE：idea使用的时候有时候报错，从起idea，忽略吧，解决不了
-    1.6跑流程
-        代码层次和数据库层次
+总结
+    1.获取所有的流程模板
+    2.获取流程模板的历史版本
+    3.获取流程模板的所有节点
+    4.获取所有运行的流程实例、历史流程实例
+    5.根据委派用户获取所有运行的流程实例、历史流程实例
+    6.根据委派用户获取所有活动节点
+        List<Task> taskList = processEngine.getTaskService()
+                .createTaskQuery()
+                .taskAssignee("java1234")
+                .list();
+    7.根据流程实例获取正在运行的活动节点
+        List<Task> taskList = processEngine.getTaskService()
+                .createTaskQuery()
+                .processInstanceId("5001")
+                .list();
+    8.根据活动节点获取委派用户
+    
+    
 2.流程定义
 3.流程实例
 4.流程变量
@@ -27,12 +30,3 @@
 5.流程控制网关
 6.任务分配
     个人任务分配：1.在示例图中写死 2.使用流程变量${流程变量} 3.监听器方式
-    
-    
-    
-    
-
-Activiti Modeler
-网页版在线流程设计器。
-Activiti Explorer
-官方demo，目前把Activiti Modeler整合进来了
