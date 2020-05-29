@@ -18,7 +18,7 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         /**
-         * 1.构建流程引擎，根据配置文件（如果25张表存在则不再创建，不存在则从新创建）
+         * 1.构建流程引擎：1.java配置 2.xml文件配置
          * 2.部署流程模板[也叫做定义]（RepositoryService流程仓库服务）：其实就是把bpmn和png文件信息写入到了数据库流程定义表中。
          * 3.启动流程实例（RuntimeService流程运行服务）：其实就是从流程模板中实例出来一个具体的流程
          * 4.查看用户任务（TaskService）
@@ -26,33 +26,29 @@ public class App {
          */
 
         /**
-         * 1.根据配置文件构建流程引擎（如果25张表存在则不再创建，不存在则从新创建）
+         * 构建流程引擎======================================================================================
+         * 配置模式：
+         *      DB_SCHEMA_UPDATE_CREATE_DROP先删除表再创建表，
+         *      DB_SCHEMA_UPDATE_TRUE如果表不存在，自动创建表，
+         *      DB_SCHEMA_UPDATE_FALSE不能自动创建表，需要表存在
          */
         /**
-         * 方式1： 不使用配置文件生成工作流环境（25张表）
+         * 1.java配置
          */
-        /*  // 引擎配置
-        ProcessEngineConfiguration pec = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();
-        pec.setJdbcDriver("com.mysql.jdbc.Driver");
-        pec.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/db_activiti?useUnicode=true&characterEncoding=UTF-8");
+        /*ProcessEngineConfiguration pec = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();
+        pec.setJdbcDriver("com.mysql.cj.jdbc.Driver");
+        pec.setJdbcUrl("jdbc:mysql://localhost:3306/db_activiti?serverTimezone=UTC");
         pec.setJdbcUsername("root");
         pec.setJdbcPassword("root");
-        // 配置模式：DB_SCHEMA_UPDATE_CREATE_DROP先删除表再创建表， DB_SCHEMA_UPDATE_TRUE如果表不存在，自动创建表，DB_SCHEMA_UPDATE_FALSE不能自动创建表，需要表存在
         pec.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
-        // 获取流程引擎对象，并生成25张表
         ProcessEngine processEngine = pec.buildProcessEngine();*/
         /**
-         * 方式2： 使用配置文件生成工作流环境（25张表）
-         *      1.createProcessEngineConfigurationFromResource
-         *      2.buildProcessEngine
+         * 2.xml配置：1.指定xml文件 2.默认xml文件
          */
-        // 引擎配置读取xml，方式1,指定xml文件
         /*ProcessEngineConfiguration processEngineConfiguration =
                 ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti.cfg.xml");
-        // 获取流程引擎对象
         ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();*/
-        // 引擎配置读取xml，方式2，默认xml文件全路径问class路径下，名字默认为activiti.cfg.xml
-         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
         /**
          * 2.部署流程定义[也叫做模板]（RepositoryService流程仓库服务）：其实就是把bpmn和png文件信息写入到了数据库流程定义表中。
@@ -98,7 +94,7 @@ public class App {
         /**
          * 4. 完成用户任务（TaskService）：
          */
-       /*processEngine.getTaskService().complete("12504");*/
+        /*processEngine.getTaskService().complete("12504");*/
 
     }
 }

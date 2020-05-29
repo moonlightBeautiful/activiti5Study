@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/testm1578408980312" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1578408980312" name="" targetNamespace="http://www.activiti.org/testm1578408980312" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="studentLeaveProcess" isClosed="false" isExecutable="true" name="studentLeaveProcess" processType="None">
+    <startEvent id="start" name="StartEvent"/>
+    <endEvent id="end" name="EndEvent"/>
+    <userTask activiti:assignee="student" activiti:exclusive="true" id="studentTask" name="studentTask"/>
+    <userTask activiti:assignee="monitor" activiti:exclusive="true" id="monitorTask" name="monitorTask"/>
+    <userTask activiti:assignee="teacher" activiti:exclusive="true" id="teacherTask" name="teacherTask"/>
+    <sequenceFlow id="_7" sourceRef="start" targetRef="studentTask"/>
+    <sequenceFlow id="_8" sourceRef="studentTask" targetRef="monitorTask"/>
+    <sequenceFlow id="_9" sourceRef="monitorTask" targetRef="teacherTask"/>
+    <sequenceFlow id="_10" sourceRef="teacherTask" targetRef="end"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="studentLeaveProcess">
+      <bpmndi:BPMNShape bpmnElement="start" id="Shape-start">
+        <dc:Bounds height="32.0" width="32.0" x="300.0" y="-10.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end" id="Shape-end">
+        <dc:Bounds height="32.0" width="32.0" x="305.0" y="385.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="studentTask" id="Shape-studentTask">
+        <dc:Bounds height="55.0" width="85.0" x="275.0" y="60.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="monitorTask" id="Shape-monitorTask">
+        <dc:Bounds height="55.0" width="85.0" x="275.0" y="160.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="teacherTask" id="Shape-teacherTask">
+        <dc:Bounds height="55.0" width="85.0" x="275.0" y="275.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7" sourceElement="start" targetElement="studentTask">
+        <di:waypoint x="316.0" y="22.0"/>
+        <di:waypoint x="316.0" y="60.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8" id="BPMNEdge__8" sourceElement="studentTask" targetElement="monitorTask">
+        <di:waypoint x="317.5" y="115.0"/>
+        <di:waypoint x="317.5" y="160.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_9" id="BPMNEdge__9" sourceElement="monitorTask" targetElement="teacherTask">
+        <di:waypoint x="317.5" y="215.0"/>
+        <di:waypoint x="317.5" y="275.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10" id="BPMNEdge__10" sourceElement="teacherTask" targetElement="end">
+        <di:waypoint x="321.0" y="330.0"/>
+        <di:waypoint x="321.0" y="385.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

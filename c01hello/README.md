@@ -1,48 +1,53 @@
 # activiti5Study
-1.hello
-    简介：
-        业务流程管理（BPM，也就是工作流）开源项目。
-        推荐书籍：activiti实战
-    代码实:1：生成25张表（也就是activiti的上下文）
-        1.pom引入依赖
-            4个依赖： mysql驱动 activiti引擎和模型  activiti与spring整合
-        2.数据库
-            创建数据库 db_activiti
-        3.生成25张表：只有act_ge_property表有数据
-            流程引擎配置（2种配置方式，使用xml配置数据库或者在java中设置数据库）
-            生成流程引擎
-            会在数据库 db_activiti 中生成 activiti 需要的25张表，这25张表就是activiti的运行环境     
-        4.25张表简介：
-            分为6种类型
-                ACT_RE_*: 'RE'表示repository，仓库，包含了流程定义和流程静态资源 （图片，规则，等等）。                                     
-                ACT_RU_*: 'RU'表示runtime，运行时，包含流程实例，任务，变量，异步任务，等运行中的数据。 Activiti只在流程实例执行过程中保存这些数据， 在流程结束时就会删除这些记录。 这样运行时表可以一直很小速度很快。                                        
-                ACT_ID_*: 'ID'表示identity，身份，包含身份信息，比如用户，组等等。                                        
-                ACT_HI_*: 'HI'表示history，历史，包含历史数据，比如历史流程实例， 变量，任务等等。                                       
-                ACT_GE_*: 'GE'表示general，通用， 包含资源文件，用在不同的场景下。      
-    idea中使用ActiBMPN绘制流程图
-        编辑器中安装4activiti辅助插件ActiBMPN
-            Activiti BPMN 2.0 designer
-            http://activiti.org/designer/update/
-            然后选择自动创建流程定义图片当保存实例图的时候
-            NOTE：idea使用的时候有时候报错，从起idea，忽略吧，解决不了
-        画流程图：bmpn文件（本质上其实是xml文件）
-            iagrams	英[ˈdaɪəgræmz] 美[ˈdaɪəˌgræmz]  n.	简图; 图解; 图表; 示意图;
-            右键，新建文件，选择BMPN file文件创建，绘制流程图
-                必须有开始和结束节点，中间放任务节点，节点与节点中间使用连线。
-                任务节点可以指定处理人assignee
-        导出png图片：先变成xml文件，再导出png文件
-            右击bpmn文件，选择【Refactor】-->【Rename】，修改其扩展名为.xml，点击【Refactor】
-            xml文件：
-                <process>标签会告诉你流程中使用的全部元素和其属性
-                <bpmndi>标签会告诉你流程图中元素的大小、位置等
-            接着右击此xml文件，选择【Diagrams】-->【Show BPMN 2.0 Diagrams...】
-            打开的界面点击【Export to file】图标，弹出【Save as image】窗口，点击【OK】即可导出png图片
-        解决中文乱码问题
-            在IDEA的安装目录，在配置文件两个文件中加上-Dfile.encoding=UTF-8
-            反正我这里是解决不了乱码问题，所以用英文吧，考，就这样吧
-    代码实战2：流程走起来
-        1.idea画流程，生成bpmn和png文件
-        2.代码跑流程
+简介：
+    业务流程管理（BPM，也就是工作流）开源项目。目前有jBPM、activiti等。
+    推荐书籍：activiti实战。
+    activiti由生成25张表（也就是activiti的上下文）组成。需要jdk1.6+
+    官网下载地址：https://www.activiti.org/get-started
+helloWorld：
+    1.pom引入依赖
+        4个依赖： mysql驱动、activiti引擎和模型、activiti与spring整合
+    2.数据库
+        创建数据库 db_activiti
+    3.生成25张表：
+        构建流程引擎：会在数据库25张表，是activiti的运行环境。
+            1.在java中配置流程引擎
+            2.读取xml配置流程引擎  
+        初始化的流程环境，只有act_ge_property表有数据。
+            next.dbid：不懂
+            schema.history：不懂
+            schema.version：activiti版本。
+    4.25张表简介：分为6种类型
+        ACT_RE_*: 'RE'表示repository，仓库，包含了流程定义和流程静态资源 （图片，规则，等等）。                                     
+        ACT_RU_*: 'RU'表示runtime，运行时，包含流程实例，任务，变量，异步任务，等运行中的数据。 Activiti只在流程实例执行过程中保存这些数据， 在流程结束时就会删除这些记录。 这样运行时表可以一直很小速度很快。                                        
+        ACT_ID_*: 'ID'表示identity，身份，包含身份信息，比如用户，组等等。                                        
+        ACT_HI_*: 'HI'表示history，历史，包含历史数据，比如历史流程实例， 变量，任务等等。                                       
+        ACT_GE_*: 'GE'表示general，通用， 包含资源文件，用在不同的场景下。  
+开发流程辅助工具
+    1.Activiti Designer
+        是#Activiti#配套的基于Eclipse（等编码工具）的可视化流程设计器，有Activiti团队开发，紧密贴合BPMN2.0规范以及Activiti的扩展元素。
+        除了可视化设计之外，还可以打包流程资源文件（包括bpmn、png、jar）、自动生成流程测试代码（JUnit）。 
+    2.Activiti Modeler
+        网页版（B/S）在线流程设计器。
+        5.6版本之后推出新版Activiti Modeler，新版Activiti Modeler基于Signavio，重新命名为：KISBPM，意为：keep it simple。
+        在activiti的github上找不到Activiti Modeler了，现在两者合并在一起了，下载Activiti Explorer之后就可以直接使用Activiti Modeler。
+    3.Activiti Explorer
+        官方demo，把压缩包中提供的activiti-explorer.war部署到Tomcat中即可使用Activiti Modeler。
+        5.11版本之后，把Activiti Modeler整合到了Activiti Explorer，可以直接创建、修改模型后部署到流程引擎。
+        1.更改数据库 2.activiti-custom-context.xml注释取消掉 3.汉化，部分不完美，用到在学吧
+            账号	    密码	    角色
+            kermit	kermit	admin
+            gonzo	gonzo	manager
+            fozzie	fozzie	user
+    4.camunda-modeler
+        idea中可视化流程设计器
+        官网下载解压，然后idea安装 External Tools里添加外部工具，快捷键ctrl+shift+alt+t调用
+25张表详细介绍：
+    1.流程图：bpmn和png文件
+        camunda-modeler        
+    2.跑流程，看表数据
+           
+
             1.根据流程配置，获取流程引擎
             2.部署流程模板(也叫做流程定义)
             3.启动流程实例
