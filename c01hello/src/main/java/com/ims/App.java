@@ -45,7 +45,8 @@ public class App {
         /**
          * 1.2  xml配置：1.指定xml文件 2.默认xml文件
          */
-        /*ProcessEngineConfiguration processEngineConfiguration = ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti.cfg.xml");
+        /*ProcessEngineConfiguration processEngineConfiguration = ProcessEngineConfiguration
+                .createProcessEngineConfigurationFromResource("activiti.cfg.xml");
         ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();*/
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
@@ -55,22 +56,21 @@ public class App {
          */
         /*Deployment deployment = processEngine.getRepositoryService()
                 .createDeployment()
-                .addClasspathResource("diagrams/myProcess.bpmn")
-                .addClasspathResource("diagrams/myProcess.png")
-                .name("我的流程")
+                .addClasspathResource("diagrams/process.bpmn")
+                .addClasspathResource("diagrams/process.png")
+                .name("我的部署1")
                 .category("类别1")
                 .deploy();
         System.out.println("部署ID:" + deployment.getId());
         System.out.println("部署Name:" + deployment.getName());
         System.out.println("部署类别:" + deployment.getCategory());
         System.out.println("部署时间:" + deployment.getDeploymentTime());*/
-
         /**
          * 3. 启动流程实例（RuntimeService流程运行服务）：===============================================================================
          *  其实就是从流程模板中实例出来一个具体的流程
          */
-        /*ProcessInstance processInstance = processEngine.getRuntimeService()
-                .startProcessInstanceByKey("myProcess");
+       /* ProcessInstance processInstance = processEngine.getRuntimeService()
+                .startProcessInstanceByKey("process");
         System.out.println("流程模板ID:" + processInstance.getProcessDefinitionId());
         System.out.println("流程实例ID:" + processInstance.getId());
         System.out.println("流程实例name:" + processInstance.getName());
@@ -81,7 +81,7 @@ public class App {
          *      条件：流程实例id、指定人，可单独可组合
          *          .taskAssignee("java1234")
          */
-        /*List<Task> taskList = processEngine.getTaskService()
+        List<Task> taskList = processEngine.getTaskService()
                 .createTaskQuery()
                 .processInstanceId("5001")
                 .list();
@@ -94,7 +94,7 @@ public class App {
             System.out.println("任务委派人:" + task.getAssignee());
             System.out.println("流程模板ID:" + task.getProcessDefinitionId());
             System.out.println("流程实例ID:" + task.getProcessInstanceId());
-        }*/
+        }
         /**
          * 4. 完成用户任务（TaskService）：======================================================================================
          */
