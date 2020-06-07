@@ -35,11 +35,24 @@ helloWorld：
     3.Activiti Explorer
         官方demo，把压缩包中提供的activiti-explorer.war部署到Tomcat中即可使用Activiti Modeler。
         5.11版本之后，把Activiti Modeler整合到了Activiti Explorer，可以直接创建、修改模型后部署到流程引擎。
-        1.更改数据库 2.activiti-custom-context.xml注释取消掉 3.汉化，部分不完美，用到在学吧
-            账号	    密码	    角色
-            kermit	kermit	admin
-            gonzo	gonzo	manager
-            fozzie	fozzie	user
+        使用
+            1.更改数据库 
+                1.activiti-explorer\WEB-INF\lib中添加myslq驱动包
+                2.修改activiti-explorer项目中activiti-explorer\WEB-INF\classes的db.properties为：
+                    db=mysql
+                    jdbc.driver=com.mysql.jdbc.Driver
+                    jdbc.url=jdbc:mysql://localhost:3306/db_activiti?serverTimezone=UTC
+                    jdbc.username=root
+                    jdbc.password=root
+                3.修改activiti-custom-context.xml：将dbProperties到最后的注释放开，不做任何修改；
+            2.activiti-custom-context.xml注释取消掉 
+            3.汉化，部分不完美，用到在学吧
+            4.登陆使用
+                账号	    密码	    角色
+                kermit	kermit	admin
+                gonzo	gonzo	manager
+                fozzie	fozzie	user
+                http://localhost:8080/activiti-explorer/
     4.camunda-modeler
         idea中可视化流程设计器
         官网下载解压，然后idea安装 External Tools里添加外部工具，快捷键ctrl+shift+alt+t调用
