@@ -13,6 +13,8 @@
         <module>c02procdef</module>
         <module>c03procinst</module>
         <module>c04variable</module>
+        <module>c05gateway</module>
+        <module>c06taskAssign</module>
     </modules>
 
     <properties>
@@ -37,7 +39,6 @@
             <artifactId>activiti-spring</artifactId>
             <version>5.22.0</version>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

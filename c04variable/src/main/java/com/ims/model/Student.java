@@ -1,3 +1,5 @@
+package com.ims.model;
+
 import java.io.Serializable;
 
 public class Student implements Serializable {

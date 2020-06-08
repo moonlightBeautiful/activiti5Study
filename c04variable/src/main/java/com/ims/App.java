@@ -1,3 +1,5 @@
+package com.ims;
+
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RuntimeService;
@@ -194,6 +196,7 @@ public class App {
                 .startProcessInstanceByKey("studentLeaveProcess", variables);
         System.out.println("流程实例ID:" + processInstance.getId());
         System.out.println("流程定义ID:" + processInstance.getProcessDefinitionId());*/
+
         /**
          * 结束用户任时设置和修改（重复设置就好了）流程变量
          */
@@ -207,24 +210,5 @@ public class App {
         variables.put("student", student);
         processEngine.getTaskService()
                 .complete("57502", variables); */
-
-        /**
-         *  历史流程实例节点查询：包含start和end节点
-         */
-        /*List<HistoricActivityInstance> list = processEngine.getHistoryService() // 历史相关Service
-                .createHistoricActivityInstanceQuery() // 创建历史活动实例查询
-                .list();
-                *//*.processInstanceId("17501") // 执行流程实例id
-                .finished()
-                .list();*//*
-        for (HistoricActivityInstance hai : list) {
-            System.out.println("活动ID:" + hai.getId());
-            System.out.println("流程实例ID:" + hai.getProcessInstanceId());
-            System.out.println("活动名称：" + hai.getActivityName());
-            System.out.println("办理人：" + hai.getAssignee());
-            System.out.println("开始时间：" + hai.getStartTime());
-            System.out.println("结束时间：" + hai.getEndTime());
-            System.out.println("=================================");
-        }*/
     }
 }
