@@ -1,11 +1,11 @@
-package sec03groupAssign;
+package com.ims;
 
 
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 
-public class IdentityTest {
+public class UserAndGroupStudy {
 
     public static void main(String[] args) {
         /**
@@ -18,7 +18,10 @@ public class IdentityTest {
         IdentityService indentityService = processEngine.getIdentityService();
 
         /**
-         * 添加用户测试
+         *  act_id_user=====================================================
+         */
+        /**
+         * 添加用户
          */
         /*User user = new UserEntity();
         user.setId("lisi"); //zhangsan lisi wangwu
@@ -32,6 +35,9 @@ public class IdentityTest {
         /*indentityService.deleteUser("lisi");*/
 
         /**
+         *  act_id_group=====================================================
+         */
+        /**
          * 添加组
          */
         /*Group group=new GroupEntity();
@@ -44,6 +50,9 @@ public class IdentityTest {
          */
         /*indentityService.deleteGroup("test");*/
 
+        /**
+         *  act_id_membership=====================================================
+         */
         /**
          * 添加用户和组的关联关系多对多
          */

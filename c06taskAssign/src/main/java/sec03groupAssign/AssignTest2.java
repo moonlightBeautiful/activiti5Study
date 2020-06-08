@@ -72,7 +72,7 @@ public class AssignTest2 {
          *      其实就是从流程定义（最新版）中实例化一个流程实例
          */
         /*Map<String,Object> variables=new HashMap<String,Object>();
-        variables.put("groupId", "test");
+
         ProcessInstance processInstance = processEngine.getRuntimeService()
                 .startProcessInstanceByKey("groupProcess02",variables);
         System.out.println("流程实例ID:" + processInstance.getId());
