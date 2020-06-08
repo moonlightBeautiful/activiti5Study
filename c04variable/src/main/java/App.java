@@ -1,9 +1,17 @@
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author gaoxu
@@ -18,9 +26,9 @@ public class App {
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
         /**
-         * 部署流程
+         * 部署流程======================================================================================
+         *      1：bpmn和png文件：
          */
-        // 部署流程方式1：bpmn和png文件：
        /*Deployment deployment = processEngine.getRepositoryService()
                 .createDeployment()
                 .addClasspathResource("diagrams/studentLeaveProcess.bpmn")
@@ -31,60 +39,54 @@ public class App {
         System.out.println("流程部署Name:" + deployment.getName());*/
 
         /**
-         * 启动流程：
+         * 启动流程：=============================================================================
          */
-       /* ProcessInstance processInstance = processEngine.getRuntimeService()
+        /*ProcessInstance processInstance = processEngine.getRuntimeService()
                 .startProcessInstanceByKey("studentLeaveProcess");
         System.out.println("流程实例ID:" + processInstance.getId());
         System.out.println("流程定义ID:" + processInstance.getProcessDefinitionId());*/
 
         /**
-         * 启动流程：其实就是从流程定义（最新版）中实例化一个流程实例，启动的时候设置流程变量
-         */
-        /*Map<String, Object> variables = new HashMap<String, Object>();
-        variables.put("days", 2);
-        variables.put("date", new Date());
-        variables.put("reason", "发烧");
-        Student student = new Student();
-        student.setId(1);
-        student.setName("张三");
-        variables.put("student", student);
-        ProcessInstance processInstance = processEngine.getRuntimeService() // 运行时Service
-                .startProcessInstanceByKey("studentLeaveProcess", variables); // 启动流程的时候，设置流程变量
-        System.out.println("流程实例ID:" + processInstance.getId());
-        System.out.println("流程定义ID:" + processInstance.getProcessDefinitionId());*/
-
-
-        /**
-         * 根据用户名查询正在运行的流程任务
+         * 查询正在运行的用户任务===============================================================================
          */
         /*List<Task> taskList = processEngine.getTaskService()
                 .createTaskQuery()
-                .taskAssignee("李四")
+                .taskAssignee("张三")
                 .list();
         for (Task task : taskList) {
             System.out.println("任务ID:" + task.getId());
             System.out.println("任务名称:" + task.getName());
             System.out.println("任务创建时间:" + task.getCreateTime());
             System.out.println("任务委派人:" + task.getAssignee());
-            System.out.println("任务干支ID:" + task.getExecutionId());
+            System.out.println("任务执行对象ID:" + task.getExecutionId());
             System.out.println("流程实例ID:" + task.getProcessInstanceId());
-            System.out.println("流程定义ID:" + task.getProcessDefinitionId());
-            System.out.println("=============================================");
+            System.out.println("流程模板ID:" + task.getProcessDefinitionId());
+            System.out.println("========================================================");
         }*/
 
         /**
-         * TaskService给正在运行的流程任务设置全局和局部变量：act_ru_variable
+         * 结束正在运行的用户任务=====================================================================
+         */
+        /*processEngine.getTaskService()
+                .complete("57502");*/
+
+
+//=========================设置流程变量==============================================================================
+        /**
+         * TaskService给正在运行的流程实例设置全局和局部变量：act_ru_variable
+         *      1.一个一个设置
+         *      2.一次性设置
          */
         /*TaskService taskService = processEngine.getTaskService(); // 任务服务
-        String taskId = "25004";
+        String taskId = "35004";
         taskService.setVariable(taskId, "days", 2);
-        taskService.setVariableLocal(taskId, "date", new Date()); //局部流程变量
+        taskService.setVariable(taskId, "date", new Date());
         taskService.setVariable(taskId, "reason", "发烧");
         Student student = new Student();
         student.setId(1);
         student.setName("张三");
-        taskService.setVariable(taskId, "student", student); // 存序列化对象*/
+        taskService.setVariable(taskId, "student", student); // 存序列化对象
+        taskService.setVariableLocal(taskId, "localDate", new Date()); //局部流程变量*/
         /*Map<String, Object> variables=new HashMap<String,Object>();
         variables.put("days", 2);
         variables.put("date", new Date());
@@ -93,17 +95,20 @@ public class App {
         taskService.setVariables(taskId, variables);*/
 
         /**
-         * TaskService查询正在运行的流程任务的全局和局部变量：act_ru_variable，2种方式，11设置和map集中设置
+         * TaskService查询正在运行的流程实例的全局和局部变量：act_ru_variable
+         *          1.一个一个获取
+         *          2.一次性获取
          */
         /*TaskService taskService = processEngine.getTaskService(); // 任务Service
-        String taskId = "25004";
+        String taskId = "40002";
         Integer days = (Integer) taskService.getVariable(taskId, "days");
-        // Date date=(Date) taskService.getVariable(taskId, "date");
-        Date date = (Date) taskService.getVariableLocal(taskId, "date");
+        Date date=(Date) taskService.getVariable(taskId, "date");
         String reason = (String) taskService.getVariable(taskId, "reason");
         Student student = (Student) taskService.getVariable(taskId, "student");
+        Date localDate = (Date) taskService.getVariableLocal(taskId, "localDate"); // 局部变量
         System.out.println("请假天数：" + days);
         System.out.println("请假日期：" + date);
+        System.out.println("请假日期（局部）：" + localDate);
         System.out.println("请假原因：" + reason);
         System.out.println("请假对象：" + student.getId() + "," + student.getName());*/
         /*TaskService taskService=processEngine.getTaskService(); // 任务Service
@@ -119,18 +124,21 @@ public class App {
         System.out.println("请假对象："+student.getId()+","+student.getName());*/
 
         /**
-         * RuntimeService给正在运行的流程任务设置全局和局部变量：act_ru_variable
+         * RuntimeService给正在运行的流程实例设置全局和局部变量：act_ru_variable
+         *      1.一个一个设置
+         *      2.一次性设置
          */
-       /* RuntimeService runtimeService = processEngine.getRuntimeService(); // 任务服务
-        String executionId = "45001";
+        /*RuntimeService runtimeService = processEngine.getRuntimeService();
+        String executionId = "50001";
         runtimeService.setVariable(executionId, "days", 2);
-        runtimeService.setVariableLocal(executionId, "date", new Date()); //局部流程变量
+        runtimeService.setVariable(executionId, "date", new Date());
         runtimeService.setVariable(executionId, "reason", "发烧");
         Student student = new Student();
         student.setId(1);
         student.setName("张三");
-        runtimeService.setVariable(executionId, "student", student); // 存序列化对象*/
-        /*RuntimeService runtimeService = processEngine.getRuntimeService(); // 任务服务
+        runtimeService.setVariable(executionId, "student", student);
+        runtimeService.setVariableLocal(executionId, "localDate", new Date()); //局部流程变量*/
+        /*RuntimeService runtimeService = processEngine.getRuntimeService();
         String executionId = "45001";
         Map<String, Object> variables=new HashMap<String,Object>();
         Student student = new Student();
@@ -143,39 +151,51 @@ public class App {
         runtimeService.setVariables(executionId, variables);*/
 
         /**
-         * RuntimeService查询正在运行的流程任务的全局和局部变量：act_ru_variable，2种方式，11设置和map集中设置
+         * RuntimeService查询正在运行的流程实例设置全局和局部变量：act_ru_variable
+         *      1.一个一个获取
+         *      2.一次性获取
          */
-        /*RuntimeService runtimeService = processEngine.getRuntimeService(); // 任务Service
-        String executionId = "45001";
+        /*RuntimeService runtimeService = processEngine.getRuntimeService();
+        String executionId = "50001";
         Integer days = (Integer) runtimeService.getVariable(executionId, "days");
-        // Date date=(Date) taskService.getVariable(taskId, "date");
-        Date date = (Date) runtimeService.getVariableLocal(executionId, "date");
+        Date date = (Date) runtimeService.getVariable(executionId, "date");
         String reason = (String) runtimeService.getVariable(executionId, "reason");
         Student student = (Student) runtimeService.getVariable(executionId, "student");
+        Date localDate = (Date) runtimeService.getVariableLocal(executionId, "localDate");
+        System.out.println("请假天数：" + days);
+        System.out.println("请假日期：" + date);
+        System.out.println("请假原因：" + reason);
+        System.out.println("请假对象：" + student.getId() + "," + student.getName());
+        System.out.println("请假日期(局部)：" + localDate);*/
+        /*RuntimeService runtimeService = processEngine.getRuntimeService(); // 任务Service
+        String executionId = "52501";
+        Map<String, Object> variables = runtimeService.getVariables(executionId);
+        Integer days = (Integer) variables.get("days");
+        Date date = (Date) variables.get("date");
+        String reason = (String) variables.get("reason");
+        Student student = (Student) variables.get("student");
         System.out.println("请假天数：" + days);
         System.out.println("请假日期：" + date);
         System.out.println("请假原因：" + reason);
         System.out.println("请假对象：" + student.getId() + "," + student.getName());*/
-        /*RuntimeService runtimeService = processEngine.getRuntimeService(); // 任务Service
-        String executionId = "52501";
-        Map<String,Object> variables=runtimeService.getVariables(executionId);
-        Integer days=(Integer) variables.get("days");
-        Date date=(Date) variables.get("date");
-        String reason=(String) variables.get("reason");
-        Student student=(Student)variables.get("student");
-        System.out.println("请假天数："+days);
-        System.out.println("请假日期："+date);
-        System.out.println("请假原因："+reason);
-        System.out.println("请假对象："+student.getId()+","+student.getName());*/
 
         /**
-         * 结束正在运行的流程任务
+         * 启动流程时设置流程变量
          */
-        /*processEngine.getTaskService()
-                .complete("52510");*/
-
+        /*Map<String, Object> variables = new HashMap<String, Object>();
+        variables.put("days", 2);
+        variables.put("date", new Date());
+        variables.put("reason", "发烧");
+        Student student = new Student();
+        student.setId(1);
+        student.setName("张三");
+        variables.put("student", student);
+        ProcessInstance processInstance = processEngine.getRuntimeService()
+                .startProcessInstanceByKey("studentLeaveProcess", variables);
+        System.out.println("流程实例ID:" + processInstance.getId());
+        System.out.println("流程定义ID:" + processInstance.getProcessDefinitionId());*/
         /**
-         * 结束正在运行的流程任务，同时设置和修改（重复设置就好了）流程变量
+         * 结束用户任时设置和修改（重复设置就好了）流程变量
          */
         /*Map<String, Object> variables=new HashMap<String,Object>();
         variables.put("days", 72);
@@ -185,8 +205,8 @@ public class App {
         student.setId(1);
         student.setName("张三2");
         variables.put("student", student);
-        processEngine.getTaskService() // 任务相关Service
-                .complete("57502", variables); //完成任务的时候，设置流程变量*/
+        processEngine.getTaskService()
+                .complete("57502", variables); */
 
         /**
          *  历史流程实例节点查询：包含start和end节点
